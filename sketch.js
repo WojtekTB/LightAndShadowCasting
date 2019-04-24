@@ -1,53 +1,60 @@
-var mainImage = [];
-var flippedImage = [];
+var screenX = window.innerWidth;
+var screenY = window.innerHeight;
+var globalScale = 30;
+var mapGrid;
 
-var canvas;
-var man;
-var imagex;
-var imageY;
-var frames = 0;
-var animFrames = 0;
-
-function preload(){
-  for(let i = 1;  i < 12; i++){
-    if(i > 9){
-      mainImage.push(loadImage("assets/idle.sprite/idle00" + i + ".png"));
-    }
-    else{
-      mainImage.push(loadImage("assets/idle.sprite/idle000" + i + ".png"));
-    }
-  }
-}
 
 function setup(){
-  canvas = createCanvas(window.innerWidth, window.innerWidth);
-  man = new ImageManupulator();
-  imageX = mainImage[0].width;
-  imageY = mainImage[0].height;
-  frameRate(60);
-
-  for(let i = 0; i < mainImage.length; i++){
-    flippedImage[i] = man.outputFlippedImage(mainImage[i]);
-  }
+  createCanvas(screenX, screenY);
+  mapGrid = createGrid();
 }
+function mousePressed() {
+    changeOnGrid(mouseX, mouseY);
+}
+
 function draw(){
-  background(100);
-  scale(-1, 1);
-  // man.drawADeafaultImage(mainImage, 0, 0, 100, 100);
-  // man.drawRotatedImage(mainImage, 110, 110, 100, 100, mouseX/100);
-  if(frames === 2){
-    man.drawAnimation(mainImage, -mouseX*5, mouseY*5, imageX, imageY, animFrames);
-    frames = 0;
-    if(animFrames > 10){
-      animFrames = 0;
+  background(50);
+  showGrid();
+}
+
+function keyPressed(){
+
+}
+
+
+function createGrid(){
+  let scale = globalScale;
+  let grid = [];
+  let x = Math.floor(screenX/scale);
+  let y = Math.floor(screenY/scale);
+  for(let i = 0; i < y; i++){
+    let placeholder = [];
+    for(let i = 0; i < x; i++){
+      placeholder.push(0);
     }
-    else{
-      animFrames++;
-    }
+    grid.push(placeholder);
+  }
+  return grid;
+}
+
+function changeOnGrid(ximp, yimp){
+  let x = Math.floor(ximp/globalScale);
+  let y = Math.floor(yimp/globalScale);
+  if(mapGrid[y][x] === 1){
+    mapGrid[y][x] = 0;
   }
   else{
-    man.drawAnimation(mainImage, -mouseX*5, mouseY*5, imageX, imageY, animFrames);
+    mapGrid[y][x] =1;
   }
-  // console.log(frames);
-  frames++;
+}
+
+function showGrid(){
+  for(let columnNumber = 0; columnNumber < mapGrid.length; columnNumber++){
+    for(let rowPosition = 0; rowPosition < mapGrid[0].length; rowPosition++){
+      if(mapGrid[columnNumber][rowPosition] === 1){
+        fill(255,255,255);
+        rect(rowPosition*globalScale, columnNumber*globalScale, globalScale, globalScale);
+      }
+    }
+  }
 }
