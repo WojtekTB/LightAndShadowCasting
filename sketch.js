@@ -15,15 +15,22 @@ function setup(){
 function mousePressed(){
   grid.changeOnGrid(mouseX, mouseY);
   grid.defineCorners();
+  // grid.defineEdges();
 }
 
 function draw(){
   background(50);
   grid.run();
+  displayDebug();
 }
 
 function keyPressed(){
 
+}
+
+function displayDebug(){
+  fill(255);
+  text("Number of corners: " + grid.gridCornerPoints.length, 0, 0, 200, 200);
 }
 
 //
