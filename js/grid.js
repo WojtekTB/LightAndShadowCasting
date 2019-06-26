@@ -37,117 +37,6 @@ class Grid{
   }
 }
 
-  // defineEdges(){//absolute garbage and doesn't work
-  //   for(let column = 0; column < this.gridMap.length; column++){
-  //     for(let row = 0; row < this.gridMap[0].length; row++){
-  //       if(this.gridMap[column][row].state === 1){//if block that needs to be checked
-  //         let block = this.gridMap[column][row];
-  //         block.clearEdges();
-  //         this.gridEdges = [];
-  //         let neighborEState;
-  //         let neighborNState;
-  //         let neighborWState;
-  //         let neighborSState;
-  //
-  //         let neighborEObj = this.gridMap[column][row + 1];
-  //         let neighborNObj = this.gridMap[column - 1][row];
-  //         let neighborWObj = this.gridMap[column][row - 1];
-  //         let neighborSObj = this.gridMap[column + 1][row];
-  //
-  //         if(neighborEObj.state === 1){//east check
-  //           neighborEState = true;
-  //         }
-  //         else{
-  //           neighborEState = false;
-  //         }
-  //         if(neighborNObj.state === 1){//north check
-  //           neighborNState = true;
-  //         }
-  //         else{
-  //           neighborNState = false;
-  //         }
-  //         if(neighborWObj.state === 1){//West check
-  //           neighborWState = true;
-  //         }
-  //         else{
-  //           neighborWState = false;
-  //         }
-  //         if(neighborSObj.state === 1){//South check
-  //           neighborSState = true;
-  //         }
-  //         else{
-  //           neighborSState = false;
-  //         }
-  //
-  //         console.table(neighborEState, neighborNState, neighborWState, neighborSState);
-  //
-  //         if(neighborEState === false){//checking if need to create edge on East
-  //           if(neighborNState){
-  //             if(neighborNObj.edgeE === null){
-  //               block.createEdgeEast();
-  //             }
-  //             else{
-  //               neighborNObj.editEdgeEast(neighborNObj.x + 1, neighborNObj.y + 1, block.x + 1, block.y + 1);
-  //             }
-  //           }
-  //           else if(neighborSState){
-  //             if(neighborNObj.edgeE === null){
-  //               block.createEdgeEast();
-  //             }
-  //             else{
-  //               neighborSObj.editEdgeEast(neighborSObj.x, neighborSObj.y, block.x + 1, block.y);
-  //             }
-  //           }
-  //           else{
-  //             block.createEdgeEast();
-  //           }
-  //         }
-  //
-  //         if(neighborNState === false){//checking if need to create edge on East
-  //           if(neighborWState){
-  //             if(neighborWObj.edgeW === null){
-  //               block.createEdgeEast();
-  //             }
-  //             else{
-  //               neighborNObj.editEdgeNorth(neighborNObj.x + 1, neighborNObj.y, block.x + 1, block.y);
-  //             }
-  //           }
-  //           else if(neighborEState){
-  //             neighborSObj.editEdgeNorth(neighborEObj.x, neighborEObj.y, block.x, block.y);
-  //           }
-  //           else{
-  //             block.createEdgeNorth();
-  //           }
-  //         }
-  //
-  //         if(neighborWState === false){//checking if need to create edge on East
-  //           if(neighborNState){
-  //             neighborNObj.editEdgeWest(neighborNObj.x, neighborNObj.y + 1, block.x, block.y + 1);
-  //           }
-  //           else if(neighborSState){
-  //             neighborSObj.editEdgeWest(neighborSObj.x, neighborSObj.y + 1, block.x, block.y);
-  //           }
-  //           else{
-  //             block.createEdgeWest();
-  //           }
-  //         }
-  //
-  //         if(neighborSState === false){//checking if need to create edge on East
-  //           if(neighborNState){
-  //             neighborNObj.editEdgeNorth(neighborNObj.x + 1, neighborNObj.y + 1, block.x + 1, block.y + 1);
-  //           }
-  //           else if(neighborEState){
-  //             neighborEObj.editEdgeNorth(neighborEObj.x + 1, neighborSObj.y + 1, block.x, block.y + 1);
-  //           }
-  //           else{
-  //             block.createEdgeEast();
-  //           }
-  //         }
-  //
-  //       }
-  //     }
-  //   }
-  // }
 
   defineCorners(){
     this.gridCornerPoints = [];
@@ -274,6 +163,7 @@ class Grid{
       this.gridCornerPoints[i].show();
     }
   }
+
 
   drawLight(){
     fill(255,255,0);
@@ -404,13 +294,10 @@ class GridBlock{
   // }
 
   show(){
-    if(this.state === 0){
-      fill(80);
-    }
-    else{
+    if(this.state === 1){
       fill(0, 200, 255);
+      rect(this.x * this.scale, this.y * this.scale, this.scale, this.scale);
     }
-    rect(this.x * this.scale, this.y * this.scale, this.scale, this.scale);
   }
 }
 
